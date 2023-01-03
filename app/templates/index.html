@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-auto">
+        <form id="upload-file" method="post" enctype="multipart/form-data">
+            <label for="imageUpload" class="upload-label">
+               Choose the document...
+            </label>
+            <input type="file" name="file" id="imageUpload" accept=".tif">
+        </form>
+
+        <div class="image-section" style="display:none;">
+            <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Classify the document!</button>
+        </div>
+
+        <div class="loader preloader" style="display:none;">
+            <div class="preloader__row">
+                <div class="preloader__item"></div>
+                <div class="preloader__item"></div>
+            </div>
+        </div>
+
+        <div id="result"></div>
+    </div>
+</div>
+
+{% endblock %}

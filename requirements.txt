@@ -1,0 +1,13 @@
+Werkzeug
+Flask
+numpy
+Keras
+gevent
+pillow
+opencv-python
+h5py
+tensorflow
+connexion
+connexion[swagger-ui]
+tornado
+setuptools

@@ -1,0 +1,4 @@
+{
+    "state_path": "resources/models/Inception-ResNet-v2-2.h5",
+    "labels_path": "resources/labels_desription.txt"
+}

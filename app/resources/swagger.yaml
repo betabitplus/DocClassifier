@@ -1,0 +1,72 @@
+openapi: 3.0.3
+info:
+  title: Document Classifier
+  description: REST Web Service For Document Classification
+  version: "1.0.0"
+servers:
+- url: /api/v1
+tags:
+- name: APIv1
+  description: Classifies document type
+paths:
+  /doc_type/predict:
+    post:
+      tags:
+      - APIv1
+      summary: Classifies document type
+      description: Accepts document file and returns its class type
+      operationId: endpoints.apiv1.predict_doc_type.post
+      parameters:
+      - name: top_n
+        in: query
+        description: 'top n of the best predicts to show. Defaults to 1.'
+        schema:
+          type: integer
+          default: 1
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: .tif document file
+        required: true
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassifierResponse'
+        400:
+          description: No document image provided
+          content: {}
+        500:
+          description: Failed to classify
+          content: {}
+components:
+  schemas:
+    ClassifierResponse:
+      type: object
+      properties:
+        preds:
+          type: array
+          description: list of predicted classes sorted by their confidance.
+          items:
+            $ref: '#/components/schemas/DocType'
+    DocType:
+      type: object
+      properties:
+        label:
+          type: string
+          readOnly: true
+          description: document class
+        prob:
+          type: number
+          readOnly: true
+          description: confidence of the prediction. The value should be in range from 0 to 1
